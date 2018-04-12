@@ -9,11 +9,11 @@ def main():
 	multiline =  """<meta charset="utf-8">
 
 	<form action="http://52.78.114.3:8080/db">
-		<input type="checkbox" name="ISBN" value="b_ISBN"> ISBN <br>
-		<input type="checkbox" name="Title" value="b_Title"> Title <br>
-		<input type="checkbox" name="Author" value="a_AuName"> Author<br>
-		<input type="checkbox" name="Publisher" value="p_PubName"> Publisher<br>
-		<input type="checkbox" name="Price" value="b_Price"> Price <br>
+		<input type="checkbox" name="column" value="b_ISBN"> ISBN <br>
+		<input type="checkbox" name="column" value="b_Title"> Title <br>
+		<input type="checkbox" name="column" value="a_AuName"> Author<br>
+		<input type="checkbox" name="column" value="p_PubName"> Publisher<br>
+		<input type="checkbox" name="column" value="b_Price"> Price <br>
 		<input type="submit" value="전송">
 	</form>
 	"""
@@ -27,26 +27,11 @@ def db():
 	str1 = "SELECT DISTINCT "
 	str2 = " FROM books JOIN Rtable ON ISBN = b_ISBN JOIN authors ON AuID = a_AuID JOIN publishers ON b_PubID = p_PubID"
 	
-	select = ''
+	input_str = request.GET.getall('column')
+	input_str = [x+' text,' for x in input_str]
+	input_str = ''.join(input_str)[:-1]
 
-	ISBN = request.GET.ISBN
-	Title = request.GET.Title
-	Author = request.GET.Author
-	Publisher = request.GET.Publisher
-	Price = request.GET.Price
-	
-	if ISBN:
-		select += ISBN+', '
-	if Title:
-		select += Title+', '
-	if Author:
-		select += Author+', '
-	if Publisher:
-		select += Publisher+', '
-	if Price:
-		select += Price+', '
-
-	fstring = str1 + select[:-2] + str2
+	fstring = str1 + input_str + str2
 
 	c.execute(fstring)
 	result=c.fetchall()
