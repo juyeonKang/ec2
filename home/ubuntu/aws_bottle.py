@@ -6,20 +6,8 @@ from bottle import route, run, template, request, post
 @route('/')
 def main():
 	#return '<b> Hello:D<br> this page is my first page! </b>'
-	multiline =  """<meta charset="utf-8">
-
-	<form action="http://52.78.114.3:8080/db" method="post">
-	  <fieldset>
- 	    <legend> Select Column View </legend>
-		<label for="ISBN"><input type="checkbox" id="ISBN" name="column" value="b_ISBN"> ISBN </label><br>
-		<label for="Title"><input type="checkbox" id="Title" name="column" value="b_Title"> Title </label><br>
-		<label for="Author"><input type="checkbox" id="Author" name="column" value="a_AuName"> Author </label><br>
-		<label for="Publisher"><input type="checkbox" id="Publisher" name="column" value="p_PubName"> Publisher </label><br>
-		<label for="Price"><input type="checkbox" id="Price" name="column" value="b_Price"> Price </label><br>
-		<input type="submit" value="선택">
-	  </filedset>
-	</form>
-	"""
+	f = open('8080html','r')
+	multiline = f.read()
 	return multiline
 
 
