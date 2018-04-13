@@ -1,6 +1,16 @@
 <meta charset="utf-8">
-
-	<form action="http://52.78.114.3:8080/db" method="post">
+<style type="text/css">
+	form.style1 fieldset {
+		padding : 1em;
+		border : 3px solid LightSalmon;
+		}
+	form.style1 legend {
+		font-size : 110%;
+		color : LightSalmon;
+		font-weight : bold;
+		}
+</style>
+	<form class="style1" action="http://52.78.114.3:8080/db" method="post">
 	  <fieldset>
  	    <legend> Select Column View </legend>
 		<label for="ISBN"><input type="checkbox" id="ISBN" name="column" value="b_ISBN"> ISBN </label><br>
