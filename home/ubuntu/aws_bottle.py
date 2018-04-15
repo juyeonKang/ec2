@@ -6,7 +6,7 @@ from bottle import route, run, template, request, post
 @route('/')
 def main():
 	#return '<b> Hello:D<br> this page is my first page! </b>'
-	f = open('8080html','r')
+	f = open('8080.html','r')
 	multiline = f.read()
 	return multiline
 
@@ -17,6 +17,7 @@ def db():
 	c = conn.cursor()
 	str1 = "SELECT DISTINCT "
 	str2 = " FROM books JOIN Rtable ON ISBN = b_ISBN JOIN authors ON AuID = a_AuID JOIN publishers ON b_PubID = p_PubID"
+	str3 = " ORDER BY "
 	
 	input_str = request.POST.getall('column')
 	column = ['< '+x[2:]+' >' for x in input_str]
@@ -24,7 +25,13 @@ def db():
 	input_str = [x+' text,' for x in input_str]
 	input_str = ''.join(input_str)[:-1]
 
-	fstring = str1 + input_str + str2
+	#### will add 'order'(list box) in '8080.html' to sorting 
+	order = request.POST.order
+
+	if order : 
+		fstring = str1 + input_str + str2 + str3 + order
+	else : 
+		fstring = str1 + input_str + str2
 
 	c.execute(fstring)
 	result=c.fetchall()
