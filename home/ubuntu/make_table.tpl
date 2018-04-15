@@ -23,4 +23,8 @@
 	%num += 1
 %end
 </table>
+<p>
+<form action="http://52.78.114.3:8080/">
+	<input type="submit" value="back">
+</form>
 
